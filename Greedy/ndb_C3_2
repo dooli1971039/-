@@ -1,0 +1,39 @@
+import java.util.*;
+public class ndb_C3_2 {
+	public static void main(String[] args) {
+		//chap3- 큰 수의 법칙
+		Scanner s=new Scanner(System.in);
+		int n=s.nextInt(); //원소의 개수
+		int m=s.nextInt(); //더할 수 있는 개수
+		int k=s.nextInt(); //연속 허용 개수
+		int arr[]=new int[n];
+		
+		for(int i=0;i<n;i++) arr[i]=s.nextInt();
+		Arrays.sort(arr);
+		
+		int sum=0;
+		while(m!=0) {
+			for(int i=0;i<k;i++) {
+				sum+=arr[arr.length-1];
+				m--;
+				if(m==0) break;
+			}
+			sum+=arr[arr.length-2];
+			m--;
+		}
+		
+		//해답
+//		// 가장 큰 수가 더해지는 횟수 계산
+//        int cnt = (m / (k + 1)) * k;  //k+1인 이유 => 6 6 6 3 이런식으로 생각해야하니까
+//        cnt += m % (k + 1);  // 묶음이 완전히 떨어지지 않고 마지막에 6 6 6 3 / 6 6 이런식으로 2개만 남을수도 있어서
+//
+//        int result = 0;
+//        result += cnt * first; // 가장 큰 수 더하기  //cnt는 가장 큰 수를 더하는 횟수
+//        result += (m - cnt) * second; // 두 번째로 큰 수 더하기
+		
+		System.out.println(sum);
+		
+
+	}
+
+}
