@@ -1,0 +1,65 @@
+import java.util.*;
+public class BOJ_16206 {
+	//#16206 롤케이크
+	
+	public static void main(String[] args) {
+		Scanner s=new Scanner(System.in);
+		int n=s.nextInt(); //롤케이크 수
+		int m=s.nextInt(); //최대 자를 수 있는 횟수
+		int roll[]=new int[n];
+		
+		for(int i=0;i<n;i++) roll[i]=s.nextInt(); //입력
+		Arrays.sort(roll); //정렬
+		
+		//nroll배열에 10의 배수부터 저장
+		int nroll[]=new int [n]; int a=0;
+		int tmproll[]=new int [n]; int b=0;
+		for(int i=0;i<n;i++) {
+			if(roll[i]%10==0) {
+				nroll[a]=roll[i];
+				a++;
+			}else {
+				tmproll[b]=roll[i];
+				b++;
+			}
+		}
+		for(int i=0;i<b;i++) {
+			nroll[a]=tmproll[i];
+			a++;
+		}
+	
+		int result=0; //만들 수 있는 롤케이크 수
+		for(int i=0;i<n;i++) {
+			//if(m==0) break; //종료
+			//위의 if문을 저 위치에 두면
+			//5 0
+			//10 10 10 10 10 이런 경우 바로 끝나버린다.
+			
+			if(nroll[i]<10) continue; //10보다 작으면 자를 수 없다
+			else if(nroll[i]==10) {
+				result++;
+			}else if(nroll[i]%10==0) { //10이 아닌 10의 배수
+				int div=nroll[i]/10; //10으로 나눈 몫 ex) 20%10=2 => 두덩이, 1번자름
+				if(m-(div-1)<0) {
+					result+=m;
+					break; //종료
+				}else {
+					result+=div; //롤케이크 수 업데이트
+					m=m-(div-1); //자를 수 있는 횟수 업데이트
+					if(m==0) break; //종료
+				}
+			}else { //10 이상의 10의 배수가 아닌 경우
+				int div=nroll[i]/10; //10으로 나눈 몫 ex) 23%10=2 => 두덩이, 2번자름
+				if(m-div<0) {
+					result+=m;
+					break; //종료
+				}else {
+					result+=div; //롤케이크 수 업데이트
+					m=m-div; //자를 수 있는 횟수 업데이트
+					if(m==0) break; //종료
+				}
+			}
+		}
+		System.out.println(result);
+	}
+}
