@@ -1,0 +1,46 @@
+import java.util.*;
+public class BOJ_14659 {
+	//#14659 한조서열정리하고옴ㅋㅋ
+	
+	public static void main(String[] args) {
+		Scanner s=new Scanner(System.in);
+		int n=s.nextInt(); //활잡이 수
+		int san[]=new int[n];
+
+		for(int i=0;i<n;i++) san[i]=s.nextInt();
+		
+		int dg=san[0];
+		int count[]=new int [n];
+		int cnt=0; //카운트해야하는 봉우리 수
+		
+		for(int i=1;i<n;i++) {
+			if(dg>san[i]) {
+				count[cnt]++;
+			}else {
+				dg=san[i];
+				cnt++;
+			}
+		}
+		
+		int max=count[0];
+		for(int i=1;i<=cnt;i++) {
+			if(max<count[i]) max=count[i];
+		}
+		System.out.println(max);
+		
+//		//해답
+//		int kill=0;
+//		int max=0;
+//		int result=0;
+//		for(int i=0;i<num;i++) {
+//			if(max<=arr[i]) { //봉우리 높이 비교
+//				max=arr[i];
+//				result=(result>kill)?result:kill; //바로 비교해서 결과 업데이트
+//				kill=0;
+//			}
+//			else kill++; //위쪽에서 dg>san[i]++ 에 해당되는 부분
+//		}
+//		result=(result>kill)?result:kill;
+//		System.out.println(result);
+	}
+}
