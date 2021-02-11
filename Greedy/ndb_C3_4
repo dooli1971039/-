@@ -1,0 +1,18 @@
+import java.util.*;
+public class ndb_C3_4 {
+
+	public static void main(String[] args) {
+		//chap3- 1이 될 때까지
+		Scanner s=new Scanner(System.in);
+		int n=s.nextInt(); //1이 되려는 수
+		int k=s.nextInt(); //나누는 수
+		
+		int count=0;
+		while(n!=1) {
+			if(n%k==0) n/=k;
+			else n-=1;
+			count++;
+		}
+		System.out.println(count);
+	}
+}
