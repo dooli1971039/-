@@ -31,6 +31,7 @@ public class Greedy_1931 {
 			arr[i]=new Pair(end,start);
 		}
 		
+		//빨리 끝나는 것부터 선택해주면 되기 때문에 정렬
 		Arrays.sort(arr);
 		
 		int time=0;
