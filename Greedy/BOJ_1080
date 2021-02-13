@@ -1,0 +1,60 @@
+import java.util.*;
+public class BOJ_1080 {
+	//#1080 행렬
+	
+	static boolean comp[][];
+	static int result=0;
+	public static void main(String[] args) {
+		Scanner s=new Scanner(System.in);
+		int n=s.nextInt();
+		int m=s.nextInt();
+		
+		s.nextLine();
+		
+		String ori[][]=new String [n][m];
+		for(int i=0;i<n;i++) {
+			ori[i]=s.nextLine().split("");
+		}
+	
+		/* 문자열 쪼개기 ==> .split(기준문자열) */
+		
+		comp=new boolean [n][m];
+		for(int i=0;i<n;i++) {
+			String line=s.nextLine();
+			String []ch=line.split("");
+			for(int j=0;j<m;j++) {
+				if(ori[i][j].equals(ch[j])) comp[i][j]=true; //같으면 true
+				else comp[i][j]=false; //다르면 false
+			}
+		}
+		
+		// false면 뒤집기
+		for(int i=0;i<=n-3;i++) {
+			for(int j=0;j<=m-3;j++) {
+				if(!comp[i][j]) changeTF(i,j); //false일때 3*3뒤집기
+			}
+		}
+		
+		//전부 true인지 확인
+		for(int i=0;i<n;i++) {
+			for(int j=0;j<m;j++) {
+				if(!comp[i][j]) {
+					result=-1;
+					break;
+				}
+			}
+		}
+		
+		System.out.println(result);
+	}
+	
+	//3*3 배열 뒤집기
+	static void changeTF(int x, int y) {
+		result++;
+		for(int i=0;i<3;i++) {
+			for(int j=0;j<3;j++) {
+				comp[x+i][y+j] = !comp[x+i][y+j];
+			}
+		}
+	}
+}
